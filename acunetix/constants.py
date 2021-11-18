@@ -2,6 +2,7 @@ API_BASE = "/api/v1/"
 
 API_SCAN = API_BASE + "scans"
 API_TARGET = API_BASE + "targets"
+API_REPORT = API_BASE + "reports"
 
 target_criticality_list = {
     "critical":"10",
@@ -21,4 +22,12 @@ scan_profiles_list = {
     "crawl_only": "11111111-1111-1111-1111-111111111117",
 }
 
+report_profile_list = {
+    "developer":"11111111-1111-1111-1111-111111111111",
+    "XML":"21111111-1111-1111-1111-111111111111",
+    "OWASP Top 10":"11111111-1111-1111-1111-111111111119",
+    "Quick":"11111111-1111-1111-1111-111111111112",
+}
+
 scan_profiles_allowed = list(scan_profiles_list.keys())
+report_profile_allowed = list(report_profile_list.keys())
