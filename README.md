@@ -1,17 +1,22 @@
-# Acunetix Python API
-```python
-
 from acunetix import Acunetix
+scan_targets = ""
+scanned_targets = ""
+saved_targets = ""
+acunetix = Acunetix(host="ip:port", api="API_KEY")
 
-acunetix = Acunetix(host="serverip:port", api="1986ad8c0a5b3xxxxxxxxxxa2042c6ba5dc7b1ee50f71b")
+# delete all targets
+# acunetix.delete_all_targets()
 
-# delete all targets 
-acunetix.delete_all_targets()
+# scan domain list
+# domains = ['domain1','domain2']
 
-# scan domain list 
-domains = ['google.com','facebook.com','github.com']
-for domain in domains:
-    acunetix.start_scan(domain)
+# print(acunetix.targets());
 
 
-```
+for i in acunetix.targets()['targets']:
+    if(i['last_scan_session_status'] == 'completed'):
+        acunetix.generated_report(i['last_scan_id'])
+        acunetix.delete_target(i['target_id'])
+
+# for domain in domains:
+#     acunetix.start_scan(domain)
