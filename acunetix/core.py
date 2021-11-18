@@ -5,6 +5,9 @@ requests.packages.urllib3.disable_warnings()
 
 from .axeception import AXException
 from .constants import *
+tarurl = "https://192.168.61.128:3443/"
+apikey = "1986ad8c0a5b3df4d7028d5f3c06e936cd3635438e99941fc87b1699d84186005"
+headers = {"X-Auth": apikey, "content-type": "application/json"}
 
 class Acunetix(object):
     def __init__(self, host=None, api=None, timeout=20):
@@ -103,3 +106,12 @@ class Acunetix(object):
         }
         print(f"Scanning {target_id} , {scan_profile}")
         return self.__send_request(method="post", endpoint=API_SCAN , data=scan_payload)
+
+    def generated_report(self, scan_id, scan_profile="developer"):
+        # print(scan_id,target)
+        report_payload = {
+            "template_id": report_profile_list[scan_profile],
+            "source": {"list_type": "scans", "id_list":[scan_id]}
+        }
+        print(f"generate report for {scan_id}")
+        return self.__send_request(method="post", endpoint=API_REPORT, data=report_payload)
